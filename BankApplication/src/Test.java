@@ -5,7 +5,9 @@ public class Test {
 		// TODO Auto-generated method stub
 		
 		IdAndPasswords idandpassword = new IdAndPasswords();
-		LoginPage loginpage = new LoginPage(idandpassword.getLoginInfo());		
+		LoginPage loginpage = new LoginPage(idandpassword.getLoginInfo());	
+		
+		System.out.println("abcd");
 	}
 
 }

@@ -19,8 +19,7 @@ public class Customer{
 	
 	
 	public void createDepositAccount() {
-		
-		DepositAccount depositacc = new DepositAccount(0.1);
+	
 	}
 	
 	public void createAccount() {
@@ -45,9 +44,7 @@ public class Customer{
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	public ArrayList<Account> getAccount() {
-		return accounts;
-	}
+
 	
 	
 	
