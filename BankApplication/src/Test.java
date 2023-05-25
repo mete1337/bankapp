@@ -6,6 +6,7 @@ public class Test {
 		
 		
 		System.out.println("baban");
+		System.out.println("abaebae");
 
 	}
 
