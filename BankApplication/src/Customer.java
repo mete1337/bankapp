@@ -1,15 +1,37 @@
+import java.util.ArrayList;
+import java.util.HashMap;
 
-public class Customer  {
+public class Customer{
 
 	protected int id;
 	protected String password;
-	protected Account[] accounts;
- 	
+	protected DepositAccount depositacc;
+	protected Account acc;
+	protected CurrencyAccount currencyacc;
+	
+	
+	Customer(int id, String password){
+		
+		this.id = id;
+		this.password = password;
+	}
 	
 	
 	
+	public void createDepositAccount() {
+		
+		DepositAccount depositacc = new DepositAccount(0.1);
+	}
 	
+	public void createAccount() {
+		
+		Account acc = new Account();
+	}
 	
+	public void createCurrency() {
+		
+		CurrencyAccount currencyacc = new CurrencyAccount();
+	}
 	
 	public int getId() {
 		return id;
@@ -23,7 +45,7 @@ public class Customer  {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	public Account[] getAccount() {
+	public ArrayList<Account> getAccount() {
 		return accounts;
 	}
 	
