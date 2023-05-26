@@ -9,7 +9,7 @@ public class Customer{
 	protected Account acc;
 	protected CurrencyAccount currencyacc;
 	protected String name;
-    protected ArrayList<Accounts> accounts;
+    protected ArrayList<Account> accounts;
 
     public Customer(String name) {
         this.name = name;
@@ -48,14 +48,14 @@ public class Customer{
 	
 	}
 	
-	public void createAccount() {
+	public void createAccount(int accId, int balance) {
 		
-		Account acc = new Account();
+		Account acc = new Account(accId, balance);
 	}
 	
-	public void createCurrency() {
+	public void createCurrency(int accountId, double varliklar, String dovizCinsi) {
 		
-		CurrencyAccount currencyacc = new CurrencyAccount();
+		CurrencyAccount currencyacc = new CurrencyAccount(accountId, varliklar, dovizCinsi);
 	}
 	
 	public int getId() {

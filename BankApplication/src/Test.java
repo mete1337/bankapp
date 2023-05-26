@@ -7,7 +7,6 @@ public class Test {
 		IdAndPasswords idandpassword = new IdAndPasswords();
 		LoginPage loginpage = new LoginPage(idandpassword.getLoginInfo());	
 		
-		public static void main(String[] args) {
 			// Müşteri oluşturma
 	        Customer customer1 = new Customer("Ahmet");
 
@@ -26,15 +25,15 @@ public class Test {
 	        customer1.addAccount(currencyAccount2);
 
 	        // Para transferi
-	        Accounts senderAccount = customer1.accounts.get(0); // Ahmet'in ilk hesabı
-	        Accounts receiverAccount = customer1.accounts.get(1); // Ahmet'in ikinci hesabı
+	        Account senderAccount = customer1.accounts.get(0); // Ahmet'in ilk hesabı
+	        Account receiverAccount = customer1.accounts.get(1); // Ahmet'in ikinci hesabı
 
 	        double transferAmount = 1000;
 	        customer1.transferMoney(senderAccount, receiverAccount, transferAmount);
 
 	        // Hesap bilgilerini gösterme
 	        System.out.println("Account Information for " + customer1.name);
-	        for (Accounts account : customer1.accounts) {
+	        for (Account account : customer1.accounts) {
 	            System.out.println("Account ID: " + account.getAccountId());
 	            System.out.println("Total Assets: " + account.getBalance());
 	            System.out.println("Logs: ");
@@ -43,8 +42,6 @@ public class Test {
 	            }
 	            System.out.println("-------------------------");
 	        }
-
-		}
 	}
 
 }
