@@ -1,67 +1,63 @@
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Random;
 
 public class Customer{
 
-	protected int id;
+	protected String id;
 	protected String password;
-	protected DepositAccount depositacc;
-	protected Account acc;
-	protected CurrencyAccount currencyacc;
-	protected String name;
-    protected ArrayList<Account> accounts;
+	protected Account[] accounts = new Account[3];
 
-    public Customer(String name) {
-        this.name = name;
-        this.accounts = new ArrayList<>();
+    public Customer(String id, String password) {
+       this.id = id;
+       this.password = password;
+       this.accounts = new Account[3];
     }
 
-    public void addAccount(Account account) {
-        accounts.add(account);
-    }
 
-    public void transferMoney(Account senderAccount, Account receiverAccount, double amount) {
-        if (senderAccount.getBalance() >= amount) {
-            senderAccount.setBalance(senderAccount.getBalance() - amount);
-            receiverAccount.setBalance(receiverAccount.getBalance() + amount);
-
-            String log = "Transfer: " + senderAccount.getAccountId() + " --> " + receiverAccount.getAccountId() +
-                    " Amount: " + amount;
-            senderAccount.getLoglar().add(log);
-            receiverAccount.getLoglar().add(log);
-
-            System.out.println("Transfer successful.");
-        } else {
-            System.out.println("Insufficient funds.");
+    public void transferMoney(Customer receiverCustomer, double amount) {
+        if (receiverCustomer.accounts[0] == null && this.accounts[0] == null) {
+        	System.out.println("there is no account");
+        }
+        else {
+        	double senderBalance = this.accounts[0].getBalance();
+        	if(senderBalance > amount) {
+        	this.accounts[0].setBalance(senderBalance - amount);
+        	double receiverBalance = receiverCustomer.accounts[0].getBalance();
+        	receiverCustomer.accounts[0].setBalance(receiverBalance + amount);
+        	}
+        	else {
+        		System.out.println("Balance is not enough for transfer");
+        	}
         }
     }
 	
-	Customer(int id, String password){
+	
+	public void createSavingAccount() {
+	
 		
-		this.id = id;
-		this.password = password;
-	}
-	
-	
-	
-	public void createDepositAccount() {
-	
-	}
-	
-	public void createAccount(int accId, int balance) {
+		SavingAccount saveacc = new SavingAccount(this.id, 0);
+		this.accounts[1] = saveacc;
 		
-		Account acc = new Account(accId, balance);
 	}
 	
-	public void createCurrency(int accountId, double varliklar, String dovizCinsi) {
+	public void createAccount() {
 		
-		CurrencyAccount currencyacc = new CurrencyAccount(accountId, varliklar, dovizCinsi);
+		Account acc = new Account(this.id, 0);
+		this.accounts[0] = acc;
 	}
 	
-	public int getId() {
+	public void createCurrency(String dovizCinsi) {
+		
+		CurrencyAccount currencyacc = new CurrencyAccount(this.id, 0, dovizCinsi);
+		this.accounts[2] = currencyacc;
+		
+	}
+	
+	public String getId() {
 		return id;
 	}
-	public void setId(int id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 	public String getPassword() {

@@ -1,17 +1,17 @@
 import java.util.ArrayList;
 
 public class Account {
-    protected int accountId;
+    protected String accountId;
     protected double balance;
     protected ArrayList<String> loglar;
 
-    public Account(int accountId, double balance) {
+    public Account(String accountId, double balance) {
         this.accountId = accountId;
         this.balance = balance;
         this.loglar = new ArrayList<>();
     }
 
-    public int getAccountId() {
+    public String getAccountId() {
         return accountId;
     }
 
