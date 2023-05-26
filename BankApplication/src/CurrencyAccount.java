@@ -11,4 +11,8 @@ public class CurrencyAccount extends Account {
     public String getDovizCinsi() {
         return dovizCinsi;
     }
+    
+    void depositMoney(String dovizCinsi) {
+
+    }
 }

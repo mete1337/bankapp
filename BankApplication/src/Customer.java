@@ -1,6 +1,5 @@
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Random;
+
 
 public class Customer{
 
@@ -13,7 +12,8 @@ public class Customer{
        this.password = password;
        this.accounts = new Account[3];
     }
-
+    
+   
 
     public void transferMoney(Customer receiverCustomer, double amount) {
         if (receiverCustomer.accounts[0] == null && this.accounts[0] == null) {
@@ -31,6 +31,7 @@ public class Customer{
         	}
         }
     }
+    
 	
 	
 	public void createSavingAccount() {

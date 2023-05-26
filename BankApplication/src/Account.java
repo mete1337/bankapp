@@ -26,6 +26,21 @@ public class Account {
     public ArrayList<String> getLoglar() {
         return loglar;
     }
+    
+    public void depositMoney(int amount) {
+    	double balance = this.balance;
+    	this.balance = balance + amount;
+    }
+    
+   
+    public void withdrawl(int amount) {
+    	double balance = this.balance;
+    	if(balance >= amount)
+    		this.balance = balance - amount;
+    	else
+    		System.out.println("not enough money");
+    }
+
 
 //    public void superclassMetodu(double toplamVarlik, ArrayList<String> logListesi) {
 //        System.out.println("Superclass Metodu Çağırıldı");
