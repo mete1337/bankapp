@@ -7,7 +7,7 @@ public class Test {
 		IdAndPasswords idandpassword = new IdAndPasswords();
 		LoginPage loginpage = new LoginPage(idandpassword.getLoginInfo());	
 		
-		System.out.println("abcd");
+		
 	}
 
 }

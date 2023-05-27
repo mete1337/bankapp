@@ -3,14 +3,14 @@ import java.util.HashMap;
 
 public class Customer{
 
-	protected int id;
+	protected String id;
 	protected String password;
 	protected DepositAccount depositacc;
 	protected Account acc;
 	protected CurrencyAccount currencyacc;
 	
 	
-	Customer(int id, String password){
+	Customer(String id, String password){
 		
 		this.id = id;
 		this.password = password;
@@ -32,10 +32,10 @@ public class Customer{
 		CurrencyAccount currencyacc = new CurrencyAccount();
 	}
 	
-	public int getId() {
+	public String getId() {
 		return id;
 	}
-	public void setId(int id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 	public String getPassword() {

@@ -15,13 +15,13 @@ public class signUpPage implements ActionListener {
 	private JTextField userIDField = new JTextField();
 	private JPasswordField userPasswordField = new JPasswordField();
 	private JLabel userIDLabel = new JLabel("userID:");
-	public HashMap<String, String> getLoginInfo() {
+	public HashMap<String, Customer> getLoginInfo() {
 		return loginInfo;
 	}
 	private JLabel userPasswordLabel = new JLabel("password:");
 	private JLabel messageLabel = new JLabel();
-	HashMap<String, String> loginInfo = new HashMap<String,String>();
-	public signUpPage(HashMap<String, String> loginInfoOriginal) {
+	HashMap<String, Customer> loginInfo = new HashMap<String,Customer>();
+	public signUpPage(HashMap<String, Customer> loginInfoOriginal) {
 		loginInfo = loginInfoOriginal;
 		userIDLabel.setBounds(50,100,75,25);
 		userPasswordLabel.setBounds(50,150,75,25);
@@ -46,6 +46,7 @@ public class signUpPage implements ActionListener {
 		frame.setSize(420, 420);
 		frame.setLayout(null);
 		frame.setVisible(true);
+		
 	}
 	@Override
 	public void actionPerformed(ActionEvent e) {
@@ -53,7 +54,8 @@ public class signUpPage implements ActionListener {
 		if(e.getSource()==signupButton) {
 			String userID = userIDField.getText();
 			String password = String.valueOf(userPasswordField.getPassword());
-			loginInfo.put(userID, password);
+			Customer newCustomer = new Customer(userID,password);
+			loginInfo.put(userID, newCustomer);
 			messageLabel.setText("U are registered!");
 			frame.dispose();
 			
