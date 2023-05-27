@@ -9,9 +9,7 @@ public class Test {
 		
 		Customer e1 = new Customer("221", "123");
 		
-		e1.createCurrency("dolar");
-		e1.accounts[2].getBalance();
-		System.out.println(e1.accounts[2].getBalance());
+		
 	}
 
 }

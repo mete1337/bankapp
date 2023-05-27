@@ -27,13 +27,13 @@ public class Account {
         return loglar;
     }
     
-    public void depositMoney(int amount) {
+    public void depositMoney(double amount) {
     	double balance = this.balance;
     	this.balance = balance + amount;
     }
     
    
-    public void withdrawl(int amount) {
+    public void withdrawl(double amount) {
     	double balance = this.balance;
     	if(balance >= amount)
     		this.balance = balance - amount;

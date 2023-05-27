@@ -1,14 +1,14 @@
 
 public class SavingAccount extends Account {
-    private double faizOrani = 0.1;
+    private double interestRate = 0.1;
 
     public SavingAccount(String accountId, double balance) {
         super(accountId, balance);
-        this.faizOrani = 0.1;
+        this.interestRate = 0.1;
     }
 
     public double getFaizOrani() {
-        return faizOrani;
+        return interestRate;
     }
     
     

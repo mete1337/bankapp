@@ -10,6 +10,7 @@ import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
@@ -47,18 +48,23 @@ public class WelcomePage extends JFrame implements ActionListener {
 	// button Group
 	private ButtonGroup transGroup;
 	private ButtonGroup accountGroup;
-
+	private String nameBank = "ÇiftlikBank";
 
 	//JPanels
 	private JPanel inputPanel;
 	private JPanel commandPanel;
 	private HashMap<String, Customer> loginInfo = new HashMap<String,Customer>();
+	private String currentId;
+	private Customer currentCustomer;
 	
 	
-	
-	public WelcomePage(HashMap<String, Customer> loginInfoOriginal) {
+	public WelcomePage(HashMap<String, Customer> loginInfoOriginal,String idOfCustomer) {
 		// Setup Frame Features
-		this.setTitle("ÇiftlikBank");
+		this.currentId = idOfCustomer;
+		this.loginInfo = loginInfoOriginal;
+		
+		this.currentCustomer = loginInfo.get(currentId);
+		this.setTitle(nameBank);
 		this.setSize(750,500);
 		this.setPreferredSize(new Dimension(750,500));
 		this.setLocation(200, 300);
@@ -66,6 +72,7 @@ public class WelcomePage extends JFrame implements ActionListener {
 		this.setVisible(true);
 		this.setResizable(false);
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+		
 		//Setup Inputs
 		setupInputs();
 		//setup Commands
@@ -96,6 +103,9 @@ public class WelcomePage extends JFrame implements ActionListener {
 		this.txtAccountNumber.setPreferredSize(new Dimension(130,30));
 		this.inputPanel.add(this.txtAccountNumber);
 		
+		this.lblMessage = new JLabel("");
+		this.lblMessage.setPreferredSize(new Dimension(120,30));
+		this.add(lblMessage);
 		
 		this.lblBalance = new JLabel("Account Balance:");
 		this.lblBalance.setPreferredSize(new Dimension(120,30));
@@ -171,7 +181,8 @@ public class WelcomePage extends JFrame implements ActionListener {
 	}
 	private void setupCommands() {
 		this.commandPanel = new JPanel();
-		this.commandPanel.setPreferredSize(new Dimension(550,200));
+		this.commandPanel.setLayout(new FlowLayout(FlowLayout.CENTER,10,20));
+		this.commandPanel.setPreferredSize(new Dimension(550,150));
 		this.commandPanel.setBorder(BorderFactory.createLineBorder(Color.black));	
 		
 		this.btnCreate = new JButton("Create");
@@ -179,7 +190,7 @@ public class WelcomePage extends JFrame implements ActionListener {
 		this.btnCreate.addActionListener(this);
 		this.commandPanel.add(this.btnCreate);
 		
-		this.btnBalance = new JButton("Balance");
+		this.btnBalance = new JButton("Show Balance");
 		this.btnBalance.setPreferredSize(new Dimension(120,30));
 		this.btnBalance.addActionListener(this);
 		this.commandPanel.add(this.btnBalance);
@@ -217,7 +228,114 @@ public class WelcomePage extends JFrame implements ActionListener {
 	public void actionPerformed(ActionEvent event) {
 		// TODO Auto-generated method stub
 		Object src = event.getSource();
+		if(src.equals(this.btnCreate)) {
+			createAccount();	
+		}
+		else if(src.equals(btnExit))
+			System.exit(0);
+		else if(src.equals(btnBalance)) {
+			checkBalance();
+		}
+		else if(src.equals(btnDeposit)) {
+			try {
+				deposit(Double.parseDouble(txtAmonut.getText()));
+			} catch (Exception e) {
+				JOptionPane.showMessageDialog(null, "Your Amount is 0!!", nameBank, JOptionPane.ERROR_MESSAGE);
+
+			}
+				
+		}
+		else if(src.equals(btnCalcInterest)) {
+			
+		}
+	}
+	private void showInterest() {
+		if(this.radSaving.isSelected()) {
+			if(checkAccount(1)) {
+				
+			}
+		}
+	}
+	private void deposit(double Amount) {
+		if(this.radAccount.isSelected()) {
+			if(checkAccount(0)) {
+				currentCustomer.accounts[0].depositMoney(Amount);
+				checkBalance();
+			}			
+		}
+		else if(this.radSaving.isSelected()) {
+			if(checkAccount(1)) { 
+				currentCustomer.accounts[1].depositMoney(Amount);
+				checkBalance();}
+		}
+		else {
+			if(checkAccount(2)) { 
+				currentCustomer.accounts[2].depositMoney(Amount);;	
+				checkBalance();
+			}
+		}
 		
 	}
+	private void  checkBalance() {
+		if(this.radAccount.isSelected()) {
+			if(checkAccount(0)) {
+				this.txtBalance.setText(Double.toString(currentCustomer.accounts[0].getBalance()));				
+			}
+			else
+				JOptionPane.showMessageDialog(null, "you dont have this account", nameBank, JOptionPane.ERROR_MESSAGE);
+		}
+		else if(this.radSaving.isSelected()) {
+			if(checkAccount(1)) 
+				this.txtBalance.setText(Double.toString(currentCustomer.accounts[1].getBalance()));				
+			else
+				JOptionPane.showMessageDialog(null, "you dont have this account", nameBank, JOptionPane.ERROR_MESSAGE);
+			
+		}
+		else {
+			if(checkAccount(2)) 
+				this.txtBalance.setText(((CurrencyAccount)currentCustomer.accounts[2]).showBalance());
+				//this.txtBalance.setText(currentCustomer.accounts[2].showBalance());	
+			else
+				JOptionPane.showMessageDialog(null, "you dont have this account", nameBank, JOptionPane.ERROR_MESSAGE);
+			
+		}
+	}
+	private boolean checkAccount(int accountType) {
+		if(currentCustomer.accounts[accountType]==null) {
+			JOptionPane.showMessageDialog(null, "you dont have this account", nameBank, JOptionPane.ERROR_MESSAGE);
+			return false;	
+		}
+		else
+			return true;
+	}
+	private void createAccount() {
+		if(this.radAccount.isSelected()) {
+			if(!checkAccount(0)) {
+				currentCustomer.createAccount();
+				//this.lblMessage.setText("you have created");
+				JOptionPane.showMessageDialog(null, "you have created", nameBank, JOptionPane.INFORMATION_MESSAGE);
+			}
+			else
+				JOptionPane.showMessageDialog(null, "you have already this account type", nameBank, JOptionPane.ERROR_MESSAGE);
+		}
+		else if(this.radSaving.isSelected()) {
+			if(!checkAccount(1)) {
+				currentCustomer.createSavingAccount();
+				JOptionPane.showMessageDialog(null, "you have created", nameBank, JOptionPane.INFORMATION_MESSAGE);}
+			else
+				JOptionPane.showMessageDialog(null, "you have already this account type", nameBank, JOptionPane.ERROR_MESSAGE);
+			
+		}
+		else {
+			if(!checkAccount(2)) {
+				currentCustomer.createCurrency("dollar");
+				JOptionPane.showMessageDialog(null, "you have created", nameBank, JOptionPane.INFORMATION_MESSAGE);}
+			else				
+				JOptionPane.showMessageDialog(null, "you have already this account type", nameBank, JOptionPane.ERROR_MESSAGE);
+
+		}
+				
+	}
+	
 	
 }
