@@ -9,7 +9,7 @@ public class SavingAccount extends Account {
 
     public double getFaizOrani() {
         return faizOrani;
-        
-        
     }
+    
+   
 }
