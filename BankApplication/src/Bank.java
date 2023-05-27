@@ -28,8 +28,8 @@ public class Bank {
 			}
 			else
 				return 3;
-			
 		}
+		
 		
 	}
 	

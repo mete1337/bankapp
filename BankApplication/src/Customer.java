@@ -13,29 +13,9 @@ public class Customer{
        this.accounts = new Account[3];
     }
     
-   
-
-    public void transferMoney(Customer receiverCustomer, double amount) {
-        if (receiverCustomer.accounts[0] == null && this.accounts[0] == null) {
-        	System.out.println("there is no account");
-        }
-        else {
-        	double senderBalance = this.accounts[0].getBalance();
-        	if(senderBalance > amount) {
-        	this.accounts[0].setBalance(senderBalance - amount);
-        	double receiverBalance = receiverCustomer.accounts[0].getBalance();
-        	receiverCustomer.accounts[0].setBalance(receiverBalance + amount);
-        	}
-        	else {
-        		System.out.println("Balance is not enough for transfer");
-        	}
-        }
-    }
-    
-	
+  	
 	
 	public void createSavingAccount() {
-	
 		
 		SavingAccount saveacc = new SavingAccount(this.id, 0);
 		this.accounts[1] = saveacc;

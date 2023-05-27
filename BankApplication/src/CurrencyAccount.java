@@ -15,17 +15,33 @@ public class CurrencyAccount extends Account {
         return currencyUnit;
     }
     
-    void depositMoney(double amount, String currencyUnit) {
+    public void depositMoney(double amount) {
     	double balance = this.balance;
     	double addMoney = 0;
     	
-    	if(currencyUnit.equalsIgnoreCase("euro"))
+    	if(this.currencyUnit.equalsIgnoreCase("euro"))
     		addMoney = amount * EURO;
-    	else if(currencyUnit.equalsIgnoreCase("dollar"))
+    	else if(this.currencyUnit.equalsIgnoreCase("dollar"))
     		addMoney = amount * DOLLAR;
-    	else if(currencyUnit.equalsIgnoreCase("sterlin"))
+    	else if(this.currencyUnit.equalsIgnoreCase("sterlin"))
     		addMoney = amount * STERLIN;
     	
     	this.balance = balance + addMoney;
     }
+    public String showBalance() {
+    	String balanceLine = null;
+    	
+    	if(this.currencyUnit.equalsIgnoreCase("euro"))
+    		balanceLine = Double.toString(this.balance) + "€";
+    	else if(this.currencyUnit.equalsIgnoreCase("dollar"))
+    		balanceLine = Double.toString(this.balance) + "$";
+    	else if(this.currencyUnit.equalsIgnoreCase("sterlin"))
+    		balanceLine = Double.toString(this.balance) + "£";
+    	
+    	return balanceLine;
+  
+    }
+    
+    
+    
 }
