@@ -64,7 +64,7 @@ public class LoginPage implements ActionListener {
 			String userID = userIDField.getText();
 			String password = String.valueOf(userPasswordField.getPassword());
 			
-			if(loginInfo.containsKey(userID)&&loginInfo.get(userID).getId().equals(password)) {
+			if(loginInfo.containsKey(userID)&&loginInfo.get(userID).equals(password)) {
 				messageLabel.setForeground(Color.green);
 				messageLabel.setText("Login Succesful");
 				frame.dispose();
