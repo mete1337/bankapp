@@ -199,6 +199,11 @@ public class WelcomePage extends JFrame implements ActionListener {
 		this.btnCalcInterest.addActionListener(this);
 		this.commandPanel.add(this.btnCalcInterest);
 		
+		this.btnApplyInterest = new JButton("Apply Interest");
+		this.btnApplyInterest.setPreferredSize(new Dimension(120,30));
+		this.btnApplyInterest.addActionListener(this);
+		this.commandPanel.add(this.btnApplyInterest);
+		
 		this.btnExit = new JButton("Exit");
 		this.btnExit.setPreferredSize(new Dimension(120,30));
 		this.btnExit.addActionListener(this);
