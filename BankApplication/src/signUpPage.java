@@ -2,9 +2,12 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.HashMap;
+import java.util.regex.Pattern;
+
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
@@ -19,13 +22,14 @@ public class signUpPage implements ActionListener {
 		return loginInfo;
 	}
 	private JLabel userPasswordLabel = new JLabel("password:");
-	private JLabel messageLabel = new JLabel();
+	private JLabel messageLabel = new JLabel("SIGNUP PAGE");
 	HashMap<String, Customer> loginInfo = new HashMap<String,Customer>();
 	public signUpPage(HashMap<String, Customer> loginInfoOriginal) {
 		loginInfo = loginInfoOriginal;
+		
 		userIDLabel.setBounds(50,100,75,25);
 		userPasswordLabel.setBounds(50,150,75,25);
-		messageLabel.setBounds(125, 250, 250, 35);
+		messageLabel.setBounds(100, 50, 250, 35);
 		messageLabel.setFont(new Font(null,Font.ITALIC,25));
 		userIDField.setBounds(125, 100, 200, 25);
 		userPasswordField.setBounds(125, 150, 200, 25);
@@ -53,12 +57,17 @@ public class signUpPage implements ActionListener {
 		// TODO Auto-generated method stub
 		if(e.getSource()==signupButton) {
 			String userID = userIDField.getText();
-			String password = String.valueOf(userPasswordField.getPassword());
-			Customer newCustomer = new Customer(userID,password);
-			loginInfo.put(userID, newCustomer);
-			messageLabel.setText("U are registered!");
-			frame.dispose();
-			
+			if(!Pattern.matches("\\d{4}", userID)) {
+				JOptionPane.showMessageDialog(null, "Your Id must be maximum 4 digits and created by numbers", "", JOptionPane.ERROR_MESSAGE);				
+			}
+			else {
+				String password = String.valueOf(userPasswordField.getPassword());
+				Customer newCustomer = new Customer(userID,password);
+				loginInfo.put(userID, newCustomer);
+				JOptionPane.showMessageDialog(null, "You Are Registered", "", JOptionPane.INFORMATION_MESSAGE);				
+				frame.dispose();
+			}
+
 		}
 		if(e.getSource()==resetButton) {
 			userIDField.setText("");

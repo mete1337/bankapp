@@ -6,6 +6,7 @@ import java.util.HashMap;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
@@ -18,7 +19,7 @@ public class LoginPage implements ActionListener {
 	private JPasswordField userPasswordField = new JPasswordField();
 	private JLabel userIDLabel = new JLabel("userID:");
 	private JLabel userPasswordLabel = new JLabel("password:");
-	private JLabel messageLabel = new JLabel();
+	private JLabel messageLabel = new JLabel("LOGIN PAGE");
 	
 	HashMap<String, Customer> loginInfo = new HashMap<String,Customer>();
 	
@@ -26,7 +27,7 @@ public class LoginPage implements ActionListener {
 		loginInfo = loginInfoOriginal;
 		userIDLabel.setBounds(50,100,75,25);
 		userPasswordLabel.setBounds(50,150,75,25);
-		messageLabel.setBounds(125, 250, 250, 35);
+		messageLabel.setBounds(100, 50, 250, 35);
 		messageLabel.setFont(new Font(null,Font.ITALIC,25));
 		userIDField.setBounds(125, 100, 200, 25);
 		userPasswordField.setBounds(125, 150, 200, 25);
@@ -65,16 +66,14 @@ public class LoginPage implements ActionListener {
 			String password = String.valueOf(userPasswordField.getPassword());
 			
 			if(loginInfo.containsKey(userID)&&loginInfo.get(userID).getPassword().equals(password)) {
-				messageLabel.setForeground(Color.green);
-				messageLabel.setText("Login Succesful");
+				JOptionPane.showMessageDialog(null, "LOGIN SUCCESFUL!!", "", JOptionPane.INFORMATION_MESSAGE);
 				frame.dispose();
 				WelcomePage welcomePage = new WelcomePage(loginInfo,userID);
 				
 				
 			}
 			else {
-				messageLabel.setForeground(Color.red);
-				messageLabel.setText("ID or Password is not invalid");
+				JOptionPane.showMessageDialog(null, "ID OR PASSWORD IS NOT INVALID!!", "", JOptionPane.ERROR_MESSAGE);
 			}
 				
 				
