@@ -7,8 +7,6 @@ public class Test {
 		IdAndPasswords idandpassword = new IdAndPasswords();
 		LoginPage loginpage = new LoginPage(idandpassword.getLoginInfo());	
 		
-		Customer e1 = new Customer("221", "123");
-		
 		
 	}
 

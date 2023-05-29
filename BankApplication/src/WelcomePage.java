@@ -24,6 +24,8 @@ public class WelcomePage extends JFrame implements ActionListener {
 	private JButton btnExit;
 	private JButton btnCreate;
 	private JButton btnBalance;
+	private JButton btnTransferMoney;
+	
 
 	//Labels
 	private JLabel lblAccountNumber;
@@ -37,8 +39,11 @@ public class WelcomePage extends JFrame implements ActionListener {
 	//Operations
 	private JRadioButton radWithdraw;
 	private JRadioButton radDeposit;
-	private JRadioButton radBuyCurrency;
 	private JRadioButton radSellCurrency;
+	private JRadioButton radTransferMoney;
+	private JRadioButton radEuro;
+	private JRadioButton radDollar;
+	private JRadioButton radSterlin;
 	
 	//Account Create Buttons
 	private JRadioButton radAccount;
@@ -48,7 +53,7 @@ public class WelcomePage extends JFrame implements ActionListener {
 	// button Group
 	private ButtonGroup transGroup;
 	private ButtonGroup accountGroup;
-	private String nameBank = "�iftlikBank";
+	private String nameBank = "ÇiftlikBank";
 
 	//JPanels
 	private JPanel inputPanel;
@@ -56,6 +61,7 @@ public class WelcomePage extends JFrame implements ActionListener {
 	private HashMap<String, Customer> loginInfo = new HashMap<String,Customer>();
 	private String currentId;
 	private Customer currentCustomer;
+	private String generalCurrency = "₺";
 	
 	
 	public WelcomePage(HashMap<String, Customer> loginInfoOriginal,String idOfCustomer) {
@@ -86,7 +92,7 @@ public class WelcomePage extends JFrame implements ActionListener {
 	
 	private void setupInputs() {
 		this.inputPanel = new JPanel();
-		this.inputPanel.setPreferredSize(new Dimension(550,200));
+		this.inputPanel.setPreferredSize(new Dimension(670,200));
 		this.inputPanel.setBorder(BorderFactory.createTitledBorder("Inputs"));
 		
 		JPanel top = new JPanel();
@@ -100,7 +106,7 @@ public class WelcomePage extends JFrame implements ActionListener {
 		
 		this.txtAccountNumber = new JTextField();
 		this.txtAccountNumber.setEditable(true); // no balance changing allower
-		this.txtAccountNumber.setPreferredSize(new Dimension(130,30));
+		this.txtAccountNumber.setPreferredSize(new Dimension(150,30));
 		this.inputPanel.add(this.txtAccountNumber);
 		
 		this.lblMessage = new JLabel("");
@@ -113,42 +119,64 @@ public class WelcomePage extends JFrame implements ActionListener {
 		
 		this.txtBalance = new JTextField();
 		this.txtBalance.setEditable(false); // no balance changing allower
-		this.txtBalance.setPreferredSize(new Dimension(130,30));
+		this.txtBalance.setPreferredSize(new Dimension(150,30));
 		this.inputPanel.add(this.txtBalance);
 		
-		
-		
 		this.radWithdraw = new JRadioButton("Withdraw");
-		this.radWithdraw.setPreferredSize(new Dimension(90,30));
+		this.radWithdraw.setPreferredSize(new Dimension(120,30));
 		this.inputPanel.add(this.radWithdraw);
 		this.radWithdraw.setSelected(true);
 		
 		this.radDeposit = new JRadioButton("Deposit");
-		this.radDeposit.setPreferredSize(new Dimension(75,30));
+		this.radDeposit.setPreferredSize(new Dimension(120,30));
 		this.inputPanel.add(this.radDeposit);
 		
-		this.radBuyCurrency = new JRadioButton("Buy Currency");
-		this.radBuyCurrency.setPreferredSize(new Dimension(120,30));
-		this.inputPanel.add(this.radBuyCurrency);
 		
 		this.radSellCurrency = new JRadioButton("Sell Currency");
-		this.radSellCurrency.setPreferredSize(new Dimension(120,30));
+		this.radSellCurrency.setPreferredSize(new Dimension(150,30));
 		this.inputPanel.add(this.radSellCurrency);
+		
+		this.radTransferMoney = new JRadioButton("Transfer Money");
+		this.radTransferMoney.setPreferredSize(new Dimension(170,30));
+		this.inputPanel.add(this.radTransferMoney);
+
 		
 		this.transGroup = new ButtonGroup();
 		this.transGroup.add(radDeposit);
 		this.transGroup.add(radWithdraw);
-		this.transGroup.add(radBuyCurrency);
 		this.transGroup.add(radSellCurrency);
+		this.transGroup.add(radTransferMoney);
 		//Transaction Amount
+		
+		
+		this.radEuro = new JRadioButton("Euro");
+		this.radEuro.setPreferredSize(new Dimension(90,30));
+		this.inputPanel.add(this.radEuro);
+		this.radEuro.setSelected(true);
+		
+		this.radDollar = new JRadioButton("Dollar");
+		this.radDollar.setPreferredSize(new Dimension(90,30));
+		this.inputPanel.add(this.radDollar);
+		
+		this.radSterlin = new JRadioButton("Sterlin");
+		this.radSterlin.setPreferredSize(new Dimension(90,30));
+		this.inputPanel.add(this.radSterlin);
+		
+		this.transGroup = new ButtonGroup();
+		this.transGroup.add(radEuro);
+		this.transGroup.add(radDollar);
+		this.transGroup.add(radSterlin);
+		
 		this.lblAmount = new JLabel("Transaction Amount:");
 		this.lblAmount.setPreferredSize(new Dimension(120,30));
 		this.inputPanel.add(this.lblAmount);
 		
 		this.txtAmonut = new JTextField();
 		this.txtAmonut.setEditable(true);
-		this.txtAmonut.setPreferredSize(new Dimension(130,30));
+		this.txtAmonut.setPreferredSize(new Dimension(120,30));
 		this.inputPanel.add(this.txtAmonut);
+		
+		
 		
 		
 		
@@ -182,7 +210,7 @@ public class WelcomePage extends JFrame implements ActionListener {
 	private void setupCommands() {
 		this.commandPanel = new JPanel();
 		this.commandPanel.setLayout(new FlowLayout(FlowLayout.CENTER,10,20));
-		this.commandPanel.setPreferredSize(new Dimension(550,150));
+		this.commandPanel.setPreferredSize(new Dimension(550,170));
 		this.commandPanel.setBorder(BorderFactory.createLineBorder(Color.black));	
 		
 		this.btnCreate = new JButton("Create");
@@ -210,94 +238,119 @@ public class WelcomePage extends JFrame implements ActionListener {
 		this.btnCalcInterest.addActionListener(this);
 		this.commandPanel.add(this.btnCalcInterest);
 		
-		this.btnApplyInterest = new JButton("Apply Interest");
-		this.btnApplyInterest.setPreferredSize(new Dimension(120,30));
+		this.btnApplyInterest = new JButton("Apply Interest For 1 Year");
+		this.btnApplyInterest.setPreferredSize(new Dimension(190,30));
 		this.btnApplyInterest.addActionListener(this);
-		this.commandPanel.add(this.btnApplyInterest);
+		this.commandPanel.add(this.btnApplyInterest);	
+		
+		this.btnTransferMoney = new JButton("Transfer Money");
+		this.btnTransferMoney.setPreferredSize(new Dimension(150,30));
+		this.btnTransferMoney.addActionListener(this);
+		this.commandPanel.add(this.btnTransferMoney);
 		
 		this.btnExit = new JButton("Exit");
 		this.btnExit.setPreferredSize(new Dimension(120,30));
 		this.btnExit.addActionListener(this);
 		this.commandPanel.add(this.btnExit);
 		
-		
-		
 		this.add(this.commandPanel);
 	}
 	@Override
 	public void actionPerformed(ActionEvent event) {
-		// TODO Auto-generated method stub
 		Object src = event.getSource();
 		if(src.equals(this.btnCreate)) {
-			createAccount();	
+			createAccount();
+			checkBalance();
 		}
-		else if(src.equals(btnExit))
-			System.exit(0);
+		else if(src.equals(btnExit)) {
+			LoginPage loginPage = new LoginPage(loginInfo);
+			dispose();
+		}
 		else if(src.equals(btnBalance)) {
 			checkBalance();
 		}
 		else if(src.equals(btnDeposit)) {
 			try {
 				deposit(Double.parseDouble(txtAmonut.getText()));
+				checkBalance();
 			} catch (Exception e) {
 				JOptionPane.showMessageDialog(null, "Your Amount is 0!!", nameBank, JOptionPane.ERROR_MESSAGE);
-
 			}
-				
 		}
 		else if(src.equals(btnCalcInterest)) {
-			
+			showInterest();
+		}
+		else if(src.equals(btnTransferMoney)) {		
+			try {
+				transferMoney(txtAccountNumber.getText(), Double.parseDouble(txtAmonut.getText()));
+				checkBalance();
+			} catch (Exception e) {
+				JOptionPane.showMessageDialog(null, "Please enter valid transfer amount!!", nameBank, JOptionPane.ERROR_MESSAGE);
+			}
+		}
+		else if(src.equals(btnApplyInterest)) {
+			applyInterest();
+		}
+		else if(src.equals(btnWithdraw)) {
+			try {
+				if(this.radSellCurrency.isSelected()) {
+					sellCurrency(Double.parseDouble(txtAmonut.getText()));
+					checkBalance();
+				}
+				else {
+				withdraw(Double.parseDouble(txtAmonut.getText()));
+				checkBalance();
+				}
+			} catch (Exception e) {
+				JOptionPane.showMessageDialog(null, "Your Amount is 0!!", nameBank, JOptionPane.ERROR_MESSAGE);
+			}
 		}
 	}
 	private void showInterest() {
 		if(this.radSaving.isSelected()) {
 			if(checkAccount(1)) {
-				
+				JOptionPane.showMessageDialog(null, "Interest Rate is " + ((SavingAccount) currentCustomer.accounts[1]).getinterestRate(), nameBank, JOptionPane.INFORMATION_MESSAGE);
 			}
 		}
 	}
 	private void deposit(double Amount) {
-		if(this.radAccount.isSelected()) {
-			if(checkAccount(0)) {
-				currentCustomer.accounts[0].depositMoney(Amount);
-				checkBalance();
-			}			
-		}
-		else if(this.radSaving.isSelected()) {
-			if(checkAccount(1)) { 
-				currentCustomer.accounts[1].depositMoney(Amount);
-				checkBalance();}
-		}
-		else {
-			if(checkAccount(2)) { 
-				currentCustomer.accounts[2].depositMoney(Amount);;	
-				checkBalance();
+		if(this.radDeposit.isSelected()) {
+			if(this.radAccount.isSelected()) {
+				if(checkAccount(0)) {
+					currentCustomer.accounts[0].depositMoney(Amount);
+					checkBalance();
+				}			
+			}
+			else if(this.radSaving.isSelected()) {
+				if(checkAccount(1)) { 
+					currentCustomer.accounts[1].depositMoney(Amount);
+					checkBalance();}
+			}
+			else {
+				if(checkAccount(2)) { 
+					currentCustomer.accounts[2].depositMoney(Amount);;	
+					checkBalance();
+				}
 			}
 		}
-		
+		else
+			JOptionPane.showMessageDialog(null, "Please select deposit option", nameBank, JOptionPane.ERROR_MESSAGE);
+			
 	}
 	private void  checkBalance() {
 		if(this.radAccount.isSelected()) {
 			if(checkAccount(0)) {
-				this.txtBalance.setText(Double.toString(currentCustomer.accounts[0].getBalance()));				
-			}
-			else
-				JOptionPane.showMessageDialog(null, "you dont have this account", nameBank, JOptionPane.ERROR_MESSAGE);
+				this.txtBalance.setText(Double.toString(currentCustomer.accounts[0].getBalance()) + generalCurrency);				
+			}	
 		}
 		else if(this.radSaving.isSelected()) {
 			if(checkAccount(1)) 
-				this.txtBalance.setText(Double.toString(currentCustomer.accounts[1].getBalance()));				
-			else
-				JOptionPane.showMessageDialog(null, "you dont have this account", nameBank, JOptionPane.ERROR_MESSAGE);
-			
+				this.txtBalance.setText(Double.toString(currentCustomer.accounts[1].getBalance()) + generalCurrency);					
 		}
 		else {
 			if(checkAccount(2)) 
 				this.txtBalance.setText(((CurrencyAccount)currentCustomer.accounts[2]).showBalance());
 				//this.txtBalance.setText(currentCustomer.accounts[2].showBalance());	
-			else
-				JOptionPane.showMessageDialog(null, "you dont have this account", nameBank, JOptionPane.ERROR_MESSAGE);
-			
 		}
 	}
 	private boolean checkAccount(int accountType) {
@@ -310,7 +363,7 @@ public class WelcomePage extends JFrame implements ActionListener {
 	}
 	private void createAccount() {
 		if(this.radAccount.isSelected()) {
-			if(!checkAccount(0)) {
+			if(currentCustomer.accounts[0]==null) {
 				currentCustomer.createAccount();
 				//this.lblMessage.setText("you have created");
 				JOptionPane.showMessageDialog(null, "you have created", nameBank, JOptionPane.INFORMATION_MESSAGE);
@@ -319,7 +372,7 @@ public class WelcomePage extends JFrame implements ActionListener {
 				JOptionPane.showMessageDialog(null, "you have already this account type", nameBank, JOptionPane.ERROR_MESSAGE);
 		}
 		else if(this.radSaving.isSelected()) {
-			if(!checkAccount(1)) {
+			if(currentCustomer.accounts[1]==null) {
 				currentCustomer.createSavingAccount();
 				JOptionPane.showMessageDialog(null, "you have created", nameBank, JOptionPane.INFORMATION_MESSAGE);}
 			else
@@ -327,8 +380,14 @@ public class WelcomePage extends JFrame implements ActionListener {
 			
 		}
 		else {
-			if(!checkAccount(2)) {
-				currentCustomer.createCurrency("dollar");
+			if(currentCustomer.accounts[2]==null) {
+				if(this.radDollar.isSelected())
+					currentCustomer.createCurrency("dollar");
+				else if(this.radEuro.isSelected()) {
+					currentCustomer.createCurrency("euro");
+				}
+				else
+					currentCustomer.createCurrency("sterlin");
 				JOptionPane.showMessageDialog(null, "you have created", nameBank, JOptionPane.INFORMATION_MESSAGE);}
 			else				
 				JOptionPane.showMessageDialog(null, "you have already this account type", nameBank, JOptionPane.ERROR_MESSAGE);
@@ -337,5 +396,80 @@ public class WelcomePage extends JFrame implements ActionListener {
 				
 	}
 	
+	private void transferMoney(String recieverId, double amount) {
+		
+		if(this.radAccount.isSelected() && this.radTransferMoney.isSelected()) {
+			Customer reciever = loginInfo.get(recieverId);
+			if(reciever.accounts[0] == null) {
+				JOptionPane.showMessageDialog(null, "This account is not found", nameBank, JOptionPane.ERROR_MESSAGE);
+			}
+			else if(recieverId.equals(currentCustomer.getId())){
+				JOptionPane.showMessageDialog(null, "You can not transfer money current account", nameBank, JOptionPane.ERROR_MESSAGE);
+			}
+			else {
+				if(amount <= currentCustomer.accounts[0].getBalance())
+			currentCustomer.transferMoney(reciever, amount);
+				else
+					JOptionPane.showMessageDialog(null, "Amount is not enough for transfer", nameBank, JOptionPane.ERROR_MESSAGE);
+			checkBalance();
+			}
+		}
+		else if(!this.radAccount.isSelected())
+			JOptionPane.showMessageDialog(null, "Only 'Account' can make money transfer", nameBank, JOptionPane.ERROR_MESSAGE);
+		else if(!this.radTransferMoney.isSelected())
+			JOptionPane.showMessageDialog(null, "Please select transfer money option", nameBank, JOptionPane.ERROR_MESSAGE);
+	}
 	
+	private void applyInterest() {
+		if(this.radSaving.isSelected()) {
+			if(checkAccount(1))
+			((SavingAccount) currentCustomer.accounts[1]).applyInterest();
+			checkBalance();
+			JOptionPane.showMessageDialog(null, "New balance is " + currentCustomer.accounts[1].getBalance(), nameBank, JOptionPane.INFORMATION_MESSAGE);
+		}
+		else {
+			JOptionPane.showMessageDialog(null, "Please select 'Saving' account type", nameBank, JOptionPane.ERROR_MESSAGE);
+		}
+	}
+	private void withdraw(double amount) {
+		if(this.radWithdraw.isSelected()) {
+			
+			
+			if(this.radAccount.isSelected() && checkAccount(0)) {
+				if(currentCustomer.accounts[0].getBalance() >= amount) {
+					currentCustomer.accounts[0].withdraw(amount);
+					JOptionPane.showMessageDialog(null, "Withdraw is done!", nameBank, JOptionPane.INFORMATION_MESSAGE);
+				}
+				else
+					JOptionPane.showMessageDialog(null, "Amount is not enough", nameBank, JOptionPane.ERROR_MESSAGE);
+				
+			}		
+			else if(this.radSaving.isSelected() && checkAccount(1)){
+				if(currentCustomer.accounts[1].getBalance() >= amount) {
+					currentCustomer.accounts[1].withdraw(amount);
+					JOptionPane.showMessageDialog(null, "Withdraw is done!", nameBank, JOptionPane.INFORMATION_MESSAGE);
+					
+				}
+				else
+					JOptionPane.showMessageDialog(null, "Amount is not enough", nameBank, JOptionPane.ERROR_MESSAGE);
+			}		
+			}
+		else
+			JOptionPane.showMessageDialog(null, "Please select withdraw option", nameBank, JOptionPane.ERROR_MESSAGE);
+		
+	}
+	private void sellCurrency(double amount) {
+		if(checkAccount(0) && checkAccount(2)) {
+			if(this.radSellCurrency.isSelected()) {
+				if(currentCustomer.sellCurrency(amount)) {
+					JOptionPane.showMessageDialog(null, "Work is done!", nameBank, JOptionPane.INFORMATION_MESSAGE);
+				}
+				else {
+					JOptionPane.showMessageDialog(null, "Amount is not enough!", nameBank, JOptionPane.ERROR_MESSAGE);
+				}	
+			}
+			else
+				JOptionPane.showMessageDialog(null, "Please select sellCurrency option", nameBank, JOptionPane.ERROR_MESSAGE);
+		}
+	}
 }

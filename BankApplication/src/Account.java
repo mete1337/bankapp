@@ -33,7 +33,7 @@ public class Account {
     }
     
    
-    public void withdrawl(double amount) {
+    public void withdraw(double amount) {
     	double balance = this.balance;
     	if(balance >= amount)
     		this.balance = balance - amount;

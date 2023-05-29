@@ -7,7 +7,7 @@ public class SavingAccount extends Account {
         this.interestRate = 0.1;
     }
 
-    public double getFaizOrani() {
+    public double getinterestRate() {
         return interestRate;
     }
     
@@ -15,6 +15,14 @@ public class SavingAccount extends Account {
     public void depositMoney(int amount) {
     	double balance = this.balance;
     	this.balance = balance + amount;
+    }
+    
+    public void applyInterest() {
+    	double balance = this.balance;
+    	
+    	double newBalance = balance * this.interestRate;
+    	
+    	this.balance = balance + newBalance;
     }
     
    

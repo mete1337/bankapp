@@ -28,7 +28,19 @@ public class CurrencyAccount extends Account {
     	
     	this.balance = balance + addMoney;
     }
-    public String showBalance() {
+    public double getEURO() {
+		return EURO;
+	}
+
+	public double getDOLLAR() {
+		return DOLLAR;
+	}
+
+	public double getSTERLIN() {
+		return STERLIN;
+	}
+
+	public String showBalance() {
     	String balanceLine = null;
     	
     	if(this.currencyUnit.equalsIgnoreCase("euro"))

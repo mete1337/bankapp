@@ -1,6 +1,6 @@
 import java.util.HashMap;
 
-public class Bank {
+public class Bank{
 
 	protected HashMap<String, Customer> customers = new HashMap<String, Customer>();
 	

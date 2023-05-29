@@ -13,6 +13,45 @@ public class Customer{
        this.accounts = new Account[3];
     }
     
+    public int transferMoney(Customer reciever, double amount) {
+		if(reciever.accounts[0] == null || this.accounts[0] == null) {
+			return 1;
+		}
+		else {
+			if(this.accounts[0].getBalance() > amount) {
+				double senderBalance = this.accounts[0].getBalance();
+				this.accounts[0].setBalance(senderBalance - amount); 
+				double recieverBalance = reciever.accounts[0].getBalance();
+				reciever.accounts[0].setBalance(recieverBalance + amount); 
+				return 2;	
+			}
+			else
+				return 3;
+			}
+		}
+    public boolean sellCurrency(double amount) {
+    	double newBalance = 0;
+    	
+    	if(amount < this.accounts[2].getBalance()) {
+	    	if(((CurrencyAccount) this.accounts[2]).getDovizCinsi().equalsIgnoreCase("dollar")) {
+	    		newBalance = amount / ((CurrencyAccount) this.accounts[2]).getDOLLAR();
+	    		
+	    	}
+	    	else if(((CurrencyAccount) this.accounts[2]).getDovizCinsi().equalsIgnoreCase("euro")) {
+	    		newBalance = amount / ((CurrencyAccount) this.accounts[2]).getEURO();
+	    	}
+	    	else
+	    		newBalance = amount / ((CurrencyAccount) this.accounts[2]).getSTERLIN();
+	    	
+	    	this.accounts[2].setBalance(this.accounts[2].getBalance() - amount);
+	    	this.accounts[0].setBalance(this.accounts[0].getBalance() + newBalance);
+	    	return true;
+    	}
+    	else
+    		return false;
+    	
+    	
+    }
   	
 	
 	public void createSavingAccount() {
