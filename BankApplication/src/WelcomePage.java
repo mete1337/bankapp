@@ -53,7 +53,7 @@ public class WelcomePage extends JFrame implements ActionListener {
 	// button Group
 	private ButtonGroup transGroup;
 	private ButtonGroup accountGroup;
-	private String nameBank = "ÇiftlikBank";
+	private String nameBank = "ÇiftlikBank- "+"ID: ";
 
 	//JPanels
 	private JPanel inputPanel;
@@ -70,7 +70,7 @@ public class WelcomePage extends JFrame implements ActionListener {
 		this.loginInfo = loginInfoOriginal;
 		
 		this.currentCustomer = loginInfo.get(currentId);
-		this.setTitle(nameBank);
+		this.setTitle(nameBank+currentId);
 		this.setSize(750,500);
 		this.setPreferredSize(new Dimension(750,500));
 		this.setLocation(200, 300);
