@@ -5,6 +5,7 @@ public class SavingAccount extends Account {
     public SavingAccount(String accountId, double balance) {
         super(accountId, balance);
         this.interestRate = 0.1;
+        
     }
 
     public double getinterestRate() {
