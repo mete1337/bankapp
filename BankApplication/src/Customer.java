@@ -18,7 +18,7 @@ public class Customer{
 			return 1;
 		}
 		else {
-			if(this.accounts[0].getBalance() > amount) {
+			if(this.accounts[0].getBalance() >= amount) {
 				double senderBalance = this.accounts[0].getBalance();
 				this.accounts[0].setBalance(senderBalance - amount); 
 				double recieverBalance = reciever.accounts[0].getBalance();

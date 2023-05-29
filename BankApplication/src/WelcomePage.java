@@ -412,7 +412,7 @@ public class WelcomePage extends JFrame implements ActionListener {
 			}
 			else {
 				if(amount <= currentCustomer.accounts[0].getBalance())
-			currentCustomer.transferMoney(reciever, amount);
+					currentCustomer.transferMoney(reciever, amount);
 				else
 					JOptionPane.showMessageDialog(null, "Amount is not enough for transfer", nameBank, JOptionPane.ERROR_MESSAGE);
 			checkBalance();
