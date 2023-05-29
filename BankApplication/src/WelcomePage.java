@@ -72,7 +72,7 @@ public class WelcomePage extends JFrame implements ActionListener {
 		this.currentCustomer = loginInfo.get(currentId);
 		this.setTitle(nameBank);
 		this.setSize(750,500);
-		this.setPreferredSize(new Dimension(750,500));
+		this.setPreferredSize(new Dimension(750,550));
 		this.setLocation(200, 300);
 		this.setLayout(new FlowLayout(FlowLayout.CENTER,5,5));
 		this.setVisible(true);
@@ -92,7 +92,7 @@ public class WelcomePage extends JFrame implements ActionListener {
 	
 	private void setupInputs() {
 		this.inputPanel = new JPanel();
-		this.inputPanel.setPreferredSize(new Dimension(670,200));
+		this.inputPanel.setPreferredSize(new Dimension(670,250));
 		this.inputPanel.setBorder(BorderFactory.createTitledBorder("Inputs"));
 		
 		JPanel top = new JPanel();
@@ -122,6 +122,9 @@ public class WelcomePage extends JFrame implements ActionListener {
 		this.txtBalance.setPreferredSize(new Dimension(150,30));
 		this.inputPanel.add(this.txtBalance);
 		
+		JLabel lblTyple1 = new JLabel("Select Operation: ");
+		this.inputPanel.add(lblTyple1);
+		
 		this.radWithdraw = new JRadioButton("Withdraw");
 		this.radWithdraw.setPreferredSize(new Dimension(120,30));
 		this.inputPanel.add(this.radWithdraw);
@@ -133,11 +136,11 @@ public class WelcomePage extends JFrame implements ActionListener {
 		
 		
 		this.radSellCurrency = new JRadioButton("Sell Currency");
-		this.radSellCurrency.setPreferredSize(new Dimension(150,30));
+		this.radSellCurrency.setPreferredSize(new Dimension(120,30));
 		this.inputPanel.add(this.radSellCurrency);
 		
 		this.radTransferMoney = new JRadioButton("Transfer Money");
-		this.radTransferMoney.setPreferredSize(new Dimension(170,30));
+		this.radTransferMoney.setPreferredSize(new Dimension(120,30));
 		this.inputPanel.add(this.radTransferMoney);
 
 		
@@ -148,18 +151,21 @@ public class WelcomePage extends JFrame implements ActionListener {
 		this.transGroup.add(radTransferMoney);
 		//Transaction Amount
 		
+		JLabel lblTyple2 = new JLabel("Select Currency Unit: ");
+		lblTyple2.setPreferredSize(new Dimension(150,30));
+		this.inputPanel.add(lblTyple2);
 		
 		this.radEuro = new JRadioButton("Euro");
-		this.radEuro.setPreferredSize(new Dimension(90,30));
+		this.radEuro.setPreferredSize(new Dimension(130,30));
 		this.inputPanel.add(this.radEuro);
 		this.radEuro.setSelected(true);
 		
 		this.radDollar = new JRadioButton("Dollar");
-		this.radDollar.setPreferredSize(new Dimension(90,30));
+		this.radDollar.setPreferredSize(new Dimension(130,30));
 		this.inputPanel.add(this.radDollar);
 		
 		this.radSterlin = new JRadioButton("Sterlin");
-		this.radSterlin.setPreferredSize(new Dimension(90,30));
+		this.radSterlin.setPreferredSize(new Dimension(130,30));
 		this.inputPanel.add(this.radSterlin);
 		
 		this.transGroup = new ButtonGroup();
@@ -181,7 +187,7 @@ public class WelcomePage extends JFrame implements ActionListener {
 		
 		
 		//
-		JLabel lblTyple = new JLabel("Select Account Type");
+		JLabel lblTyple = new JLabel("Select Account Type: ");
 		top.add(lblTyple);
 		
 		this.radAccount = new JRadioButton("Account");
