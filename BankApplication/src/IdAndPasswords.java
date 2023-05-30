@@ -7,11 +7,11 @@ public class IdAndPasswords {
 	Customer [] a = new Customer[5];
 	private HashMap<String, Customer> loginInfo = new HashMap<String, Customer>();
 	public IdAndPasswords(){ 
-		ids[0] = "0";
-		ids[1] = "1"; // these are for testing
-		ids[2] = "2";
-		ids[3] = "3";
-		ids[4] = "4";
+		ids[0] = "1234";
+		ids[1] = "1324"; // these are for testing
+		ids[2] = "2134";
+		ids[3] = "3421";
+		ids[4] = "4132";
 		passwords[0] = "0";
 		passwords[1] = "1";
 		passwords[2] = "2";
