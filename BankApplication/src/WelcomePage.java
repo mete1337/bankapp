@@ -64,7 +64,7 @@ public class WelcomePage extends JFrame implements ActionListener {
 	private String generalCurrency = "₺";
 	
 	
-	public WelcomePage(HashMap<String, Customer> loginInfoOriginal,String idOfCustomer) {
+	public WelcomePage(HashMap<String, Customer> loginInfoOriginal,String idOfCustomer) { // holds every customer inside of a hash map 
 		// Setup Frame Features
 		this.currentId = idOfCustomer;
 		this.loginInfo = loginInfoOriginal;
@@ -207,7 +207,7 @@ public class WelcomePage extends JFrame implements ActionListener {
 		// add to frame
 		this.add(this.inputPanel);
 	}
-	private void setupCommands() {
+	private void setupCommands() {  // functions for main screen implementations
 		this.commandPanel = new JPanel();
 		this.commandPanel.setLayout(new FlowLayout(FlowLayout.CENTER,10,20));
 		this.commandPanel.setPreferredSize(new Dimension(550,170));
@@ -256,9 +256,9 @@ public class WelcomePage extends JFrame implements ActionListener {
 		this.add(this.commandPanel);
 	}
 	@Override
-	public void actionPerformed(ActionEvent event) {
+	public void actionPerformed(ActionEvent event) { // these if else methods are for which button used and what they will do
 		Object src = event.getSource();
-		if(src.equals(this.btnCreate)) {
+		if(src.equals(this.btnCreate)) { // if create button used
 			createAccount();
 			checkBalance();
 		}
@@ -313,9 +313,9 @@ public class WelcomePage extends JFrame implements ActionListener {
 			}
 		}
 	}
-	private void deposit(double Amount) {
+	private void deposit(double Amount) { // calls deposit functions
 		if(this.radDeposit.isSelected()) {
-			if(this.radAccount.isSelected()) {
+			if(this.radAccount.isSelected()) { //Control which account type selected
 				if(checkAccount(0)) {
 					currentCustomer.accounts[0].depositMoney(Amount);
 					checkBalance();
@@ -337,7 +337,7 @@ public class WelcomePage extends JFrame implements ActionListener {
 			JOptionPane.showMessageDialog(null, "Please select deposit option", nameBank, JOptionPane.ERROR_MESSAGE);
 			
 	}
-	private void  checkBalance() {
+	private void  checkBalance() { // calls check getbalance functions according to the selected account types
 		if(this.radAccount.isSelected()) {
 			if(checkAccount(0)) {
 				this.txtBalance.setText(Double.toString(currentCustomer.accounts[0].getBalance()) + generalCurrency);				
@@ -353,7 +353,7 @@ public class WelcomePage extends JFrame implements ActionListener {
 				//this.txtBalance.setText(currentCustomer.accounts[2].showBalance());	
 		}
 	}
-	private boolean checkAccount(int accountType) {
+	private boolean checkAccount(int accountType) { // this is a shortcut for controlling if that account exist
 		if(currentCustomer.accounts[accountType]==null) {
 			JOptionPane.showMessageDialog(null, "you dont have this account", nameBank, JOptionPane.ERROR_MESSAGE);
 			return false;	
@@ -361,7 +361,7 @@ public class WelcomePage extends JFrame implements ActionListener {
 		else
 			return true;
 	}
-	private void createAccount() {
+	private void createAccount() { // this function creates account according to which type of account selected
 		if(this.radAccount.isSelected()) {
 			if(currentCustomer.accounts[0]==null) {
 				currentCustomer.createAccount();
@@ -396,7 +396,7 @@ public class WelcomePage extends JFrame implements ActionListener {
 				
 	}
 	
-	private void transferMoney(String recieverId, double amount) {
+	private void transferMoney(String recieverId, double amount) { // this funtions transfer money to another account
 		
 		if(this.radAccount.isSelected() && this.radTransferMoney.isSelected()) {
 			Customer reciever = loginInfo.get(recieverId);
@@ -424,7 +424,7 @@ public class WelcomePage extends JFrame implements ActionListener {
 			JOptionPane.showMessageDialog(null, "Please select transfer money option", nameBank, JOptionPane.ERROR_MESSAGE);
 	}
 	
-	private void applyInterest() {
+	private void applyInterest() { // applies interest
 		if(this.radSaving.isSelected()) {
 			if(checkAccount(1))
 			((SavingAccount) currentCustomer.accounts[1]).applyInterest();
@@ -435,13 +435,13 @@ public class WelcomePage extends JFrame implements ActionListener {
 			JOptionPane.showMessageDialog(null, "Please select 'Saving' account type", nameBank, JOptionPane.ERROR_MESSAGE);
 		}
 	}
-	private void withdraw(double amount) {
+	private void withdraw(double amount) {  // calls withdraws functions inside of account class
 		if(this.radWithdraw.isSelected()) {
 			
 			
-			if(this.radAccount.isSelected() && checkAccount(0)) {
+			if(this.radAccount.isSelected() && checkAccount(0)) { //controls which accoun type selected
 				if(currentCustomer.accounts[0].getBalance() >= amount) {
-					currentCustomer.accounts[0].withdraw(amount);
+					currentCustomer.accounts[0].withdraw(amount); // calls withdraw function from account class
 					JOptionPane.showMessageDialog(null, "Withdraw is done!", nameBank, JOptionPane.INFORMATION_MESSAGE);
 				}
 				else
@@ -462,10 +462,10 @@ public class WelcomePage extends JFrame implements ActionListener {
 			JOptionPane.showMessageDialog(null, "Please select withdraw option", nameBank, JOptionPane.ERROR_MESSAGE);
 		
 	}
-	private void sellCurrency(double amount) {
+	private void sellCurrency(double amount) { // this function calls sellcurrency method from currency account
 		if(checkAccount(0) && checkAccount(2)) {
 			if(this.radSellCurrency.isSelected()) {
-				if(currentCustomer.sellCurrency(amount)) {
+				if(currentCustomer.sellCurrency(amount)) { 
 					JOptionPane.showMessageDialog(null, "Work is done!", nameBank, JOptionPane.INFORMATION_MESSAGE);
 				}
 				else {

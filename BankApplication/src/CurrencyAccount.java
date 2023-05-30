@@ -11,15 +11,15 @@ public class CurrencyAccount extends Account {
         this.currencyUnit = currencyUnit;
     }
 
-    public String getDovizCinsi() {
+    public String getcurrencyUnit() {
         return currencyUnit;
     }
     
-    public void depositMoney(double amount) {
+    public void depositMoney(double amount) { // deposit money to currency account according to which type of account created
     	double balance = this.balance;
     	double addMoney = 0;
     	
-    	if(this.currencyUnit.equalsIgnoreCase("euro"))
+    	if(this.currencyUnit.equalsIgnoreCase("euro")) // calculation according to todays currency
     		addMoney = amount * EURO;
     	else if(this.currencyUnit.equalsIgnoreCase("dollar"))
     		addMoney = amount * DOLLAR;

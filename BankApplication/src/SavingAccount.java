@@ -1,6 +1,6 @@
 
 public class SavingAccount extends Account {
-    private double interestRate = 0.1;
+    private double interestRate = 0.1; // constant interest rate
 
     public SavingAccount(String accountId, double balance) {
         super(accountId, balance);
@@ -9,19 +9,13 @@ public class SavingAccount extends Account {
     }
 
     public double getinterestRate() {
-        return interestRate;
+        return interestRate; 
     }
-    
-    
-    public void depositMoney(int amount) {
-    	double balance = this.balance;
-    	this.balance = balance + amount;
-    }
-    
-    public void applyInterest() {
+        
+    public void applyInterest() { 
     	double balance = this.balance;
     	
-    	double newBalance = balance * this.interestRate;
+    	double newBalance = balance * this.interestRate; // calculates new balance according to interest rate
     	
     	this.balance = balance + newBalance;
     }

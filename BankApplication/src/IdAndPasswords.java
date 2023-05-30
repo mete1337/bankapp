@@ -6,9 +6,9 @@ public class IdAndPasswords {
 	private String[] passwords  = new String[5];
 	Customer [] a = new Customer[5];
 	private HashMap<String, Customer> loginInfo = new HashMap<String, Customer>();
-	public IdAndPasswords(){
+	public IdAndPasswords(){ 
 		ids[0] = "0";
-		ids[1] = "1";
+		ids[1] = "1"; // these are for testing
 		ids[2] = "2";
 		ids[3] = "3";
 		ids[4] = "4";

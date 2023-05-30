@@ -55,14 +55,14 @@ public class signUpPage implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
-		if(e.getSource()==signupButton) {
+		if(e.getSource()==signupButton) { // if sign up button used
 			String userID = userIDField.getText();
-			if(!Pattern.matches("\\d{4}", userID)) {
+			if(!Pattern.matches("\\d{4}", userID)) { // checks if user input only 4 digit
 				JOptionPane.showMessageDialog(null, "Your Id must be maximum 4 digits and created by numbers", "", JOptionPane.ERROR_MESSAGE);				
 			}
 			else {
 				String password = String.valueOf(userPasswordField.getPassword());
-				Customer newCustomer = new Customer(userID,password);
+				Customer newCustomer = new Customer(userID,password); // creates new customer and add it to the hash map
 				loginInfo.put(userID, newCustomer);
 				JOptionPane.showMessageDialog(null, "You Are Registered", "", JOptionPane.INFORMATION_MESSAGE);				
 				frame.dispose();

@@ -61,11 +61,11 @@ public class LoginPage implements ActionListener {
 			userIDField.setText("");
 			userPasswordField.setText("");
 		}
-		if(e.getSource()==loginButton) {
+		if(e.getSource()==loginButton) { 
 			String userID = userIDField.getText();
 			String password = String.valueOf(userPasswordField.getPassword());
 			
-			if(loginInfo.containsKey(userID)&&loginInfo.get(userID).getPassword().equals(password)) {
+			if(loginInfo.containsKey(userID)&&loginInfo.get(userID).getPassword().equals(password)) { //control if password is correct
 				JOptionPane.showMessageDialog(null, "LOGIN SUCCESFUL!!", "", JOptionPane.INFORMATION_MESSAGE);
 				frame.dispose();
 				WelcomePage welcomePage = new WelcomePage(loginInfo,userID);
